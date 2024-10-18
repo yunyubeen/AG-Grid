@@ -15,22 +15,17 @@ function App() {
     { name: "title", label: "title" },
     { name: "genre", label: "genre" },
     { name: "source", label: "source" },
-    // {
-    //   label: "actors",
-    //   getter: (values) => {
-    //     console.log(values);
-    //     return "[" + values.actor + "]";
-    //   },
-    // },
     {
       label: "actors",
       getter: (values) => {
         return values.actor.split(", ").length > 2
-          ? values.actor.split(", ").slice(0, 2).join(", ") +
+          ? "[" +
+              values.actor.split(", ").slice(0, 2).join(", ") +
               " 외 " +
               (values.actor.split(", ").length - 2) +
-              "명"
-          : values.actor;
+              "명" +
+              "]"
+          : "[" + values.actor + "]";
       },
     },
   ];
@@ -55,16 +50,17 @@ function App() {
       actor: "헤르미온느, 해리포터",
     },
   ];
-  // 필터링 이 부분에 추가
-  const filteredContents = selectedName
-    ? contents.filter((contents) => contents.genre == selectedName)
-    : contents;
+
   return (
     <div>
       <h1>필터링</h1>
       <GroupButton2 names={names} onButtonClick={handleClick}></GroupButton2>
       <p>선택된 버튼 : {selectedName}</p>
-      <DataGrid columns={columns} contents={filteredContents}></DataGrid>
+      <DataGrid
+        columns={columns}
+        contents={contents}
+        selectedName={selectedName}
+      ></DataGrid>
     </div>
   );
 }
