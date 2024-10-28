@@ -10,7 +10,9 @@ function App() {
   const handleClick = (name) => {
     setSelectedName(name);
   };
-
+  const handleRowClick = (data) => {
+    alert(data.title);
+  };
   const columns = [
     { name: "title", label: "title" },
     { name: "genre", label: "genre" },
@@ -32,18 +34,21 @@ function App() {
 
   const contents = [
     {
+      id: 1,
       title: "베테랑2",
       source: "영화 이미지-베테랑",
       genre: "액션",
       actor: "황정민, 정해인, 장윤주, 진경",
     },
     {
+      id: 2,
       title: "노트북",
       source: "이미지2",
       genre: "로맨스",
       actor: "배우2",
     },
     {
+      id: 3,
       title: "해리포터-죽음의 성물",
       source: "해리포터 이미지",
       genre: "판타지",
@@ -60,6 +65,7 @@ function App() {
         columns={columns}
         contents={contents}
         selectedName={selectedName}
+        handleRowClick={handleRowClick}
       ></DataGrid>
     </div>
   );
